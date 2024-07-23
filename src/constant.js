@@ -1,0 +1,1 @@
+export const USUARIO_LOCAL_STIRNG = "HEADPIZE__USUARIO";

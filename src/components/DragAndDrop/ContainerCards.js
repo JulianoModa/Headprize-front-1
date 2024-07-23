@@ -1,0 +1,34 @@
+import { CardItem } from "./CardItem"
+
+
+export const ContainerCards = ({ items = [], status, isDragging, handleDragging, handleUpdateList, openCandModal }) => {
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        handleUpdateList(+e.dataTransfer.getData('text'), status)
+        handleDragging(false)
+    }
+
+    const handleDragOver = (e) => e.preventDefault()
+
+    return (
+        <div
+            className={`layout-cards ${isDragging ? 'layout-dragging' : ''}`}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+        >
+            <p>{status}</p>
+            {
+                items.map(item => (
+                    status === item.status
+                    && <CardItem
+                        onClick={openCandModal}
+                        data={item}
+                        key={item.id}
+                        handleDragging={handleDragging}
+                    />
+                ))
+            }
+        </div>
+    )
+}
